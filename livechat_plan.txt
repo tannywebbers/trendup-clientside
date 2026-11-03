@@ -1,0 +1,15 @@
+Plan to make live chat flow match trendup-api-frontend reference:
+
+1. Update LiveChat.tsx imports/structure to match reference style where needed
+2. Auth: reference uses useAuth() returning {session, profile}, target currently does const { user, profile } = useAuth() as any; const session = { user } as any; - keep compatible
+3. Change initial load flow: 
+- Reference: when opening (and not admin), setUnread(0), loadChat(). loadChat() calls open_support_chat RPC, if returns ticket get full via get_support_ticket, mark read. If no ticket, show greeting from get_public_branding.
+- Target currently calls ensure_support_ticket() directly on open. Need to match reference flow.
+4. Sending messages:
+- Reference: ensure ticket via ensure_support_ticket if needed with p_subject; call reply_support_ticket with p_ticket_id, p_body, p_attachment. Then refetch get_support_ticket, mark read.
+- Target: ensure via ensure_support_ticket() (no params), call reply_support_ticket with p_message and p_is_staff:false plus direct insert fallback - need to match reference's RPC calls.
+5. Ending chat:
+- Reference: calls end_support_chat RPC with p_ticket_id, p_resolved
+- Target does direct table update - change to match reference
+6. Also need to handle admin area path correctly for target (target uses /baki/stage/admin vs reference uses /back/stage/admin) - but target already has /baki/stage/admin, keep as is
+7. Other details like exports, component structure

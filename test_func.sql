@@ -1,0 +1,1 @@
+﻿CREATE OR REPLACE FUNCTION public.open_support_chat() RETURNS jsonb LANGUAGE sql SECURITY DEFINER STABLE SET search_path = public AS \$\\$\\$ SELECT jsonb_build_object('ticket_id', gen_random_uuid()::text, 'status', 'open', 'created_at', now())\$\\$\\$;

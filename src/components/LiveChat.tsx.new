@@ -1,0 +1,17 @@
+﻿import { useCallback, useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useAuth } from '@/hooks/use-auth'
+import { supabase } from '@/integrations/supabase/client'
+import { subscribeChanges, unsubscribeChanges } from '@/lib/realtime'
+import { createPreviewUrl, revokePreviewUrl, uploadAttachment } from '@/lib/supportFiles'
+import ChatFilePreview from './ChatFilePreview'
+import ChatText from './ChatText'
+import SupportAttachment from './SupportAttachment'
+import Spinner from './Spinner'
+
+const ENDED = new Set(['closed', 'resolved'])
+
+const GREY = 'bg-[#e5e5ea]'
+const BLUE = 'bg-[#007aff]'
+
+

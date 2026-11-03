@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme — white background, grey cards, black text */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 8%;
+
+    --card: 240 6% 95%;
+    --card-foreground: 0 0% 8%;
+
+    --popover: 240 6% 95%;
+    --popover-foreground: 0 0% 8%;
+
+    /* Electric pink primary */
+    --primary: 330 90% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Light purple secondary */
+    --secondary: 270 30% 94%;
+    --secondary-foreground: 270 50% 25%;
+
+    --muted: 240 6% 91%;
+    --muted-foreground: 240 5% 40%;
+
+    /* Cyan accent */
+    --accent: 180 80% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Success green */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning orange */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 240 6% 86%;
+    --input: 240 6% 90%;
+    --ring: 330 90% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(330 90% 50%) 0%, hsl(270 80% 55%) 50%, hsl(200 90% 50%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(180 80% 45%) 0%, hsl(200 90% 50%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(240 6% 96%) 0%, hsl(240 6% 92%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(330 90% 50% / 0.1) 0%, transparent 70%);
+    
+    --glass-bg: hsl(0 0% 100% / 0.7);
+    --glass-border: hsl(0 0% 0% / 0.1);
+    
+    --shadow-glow: 0 0 60px hsl(330 90% 50% / 0.15);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.08);
+    --shadow-elevated: 0 20px 60px hsl(0 0% 0% / 0.1);
+
+    --sidebar-background: 240 6% 95%;
+    --sidebar-foreground: 0 0% 8%;
+    --sidebar-primary: 330 90% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 6% 90%;
+    --sidebar-accent-foreground: 0 0% 8%;
+    --sidebar-border: 240 6% 86%;
+    --sidebar-ring: 330 90% 50%;
+  }
+
+  .dark {
+    /* Dark theme — black background, grey cards, white text */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 96%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 96%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 96%;
+
+    /* Electric pink primary */
+    --primary: 330 90% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Deep grey secondary */
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 96%;
+
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 62%;
+
+    /* Cyan accent */
+    --accent: 180 80% 50%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 96%;
+
+    /* Success green */
+    --success: 142 76% 46%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning orange */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 16%;
+    --ring: 330 90% 60%;
+
+    /* Custom tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(330 90% 60%) 0%, hsl(270 80% 55%) 50%, hsl(200 90% 50%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(180 80% 50%) 0%, hsl(200 90% 50%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 12%) 0%, hsl(0 0% 8%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(330 90% 60% / 0.15) 0%, transparent 70%);
+    
+    --glass-bg: hsl(0 0% 10% / 0.6);
+    --glass-border: hsl(0 0% 100% / 0.1);
+    
+    --shadow-glow: 0 0 60px hsl(330 90% 60% / 0.3);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.4);
+    --shadow-elevated: 0 20px 60px hsl(0 0% 0% / 0.5);
+
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 330 90% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 16%;
+    --sidebar-accent-foreground: 0 0% 96%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 330 90% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Outfit', sans-serif;
+    overflow-wrap: break-word;
+  }
+
+  /* Keep long content contained inside its cards globally */
+  [class*="prose"] {
+    overflow-wrap: anywhere;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-border {
+    position: relative;
+    background: var(--gradient-card);
+    border-radius: var(--radius);
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-primary);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 40px hsl(330 90% 60% / 0.5);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  .animate-marquee {
+    animation: marquee 26s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(330 90% 60% / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(330 90% 60% / 0.6); }
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
